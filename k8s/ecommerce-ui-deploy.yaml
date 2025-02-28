@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-ui-deploy
+  labels:
+    name: ecommerce-ui-deploy
+    app: ecommerce-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: ecommerce-ui-pod
+      app: ecommerce-app
+  template:
+    metadata:
+      name: ecommerce-ui-pod
+      labels:
+        name: ecommerce-ui-pod
+        app: ecommerce-app
+    spec:
+      containers:
+        - name: ecommerce-microservices-frontend
+          image: minhnt2012/ecommerce-microservices_frontend:v1
+          ports:
+            - containerPort: 8080

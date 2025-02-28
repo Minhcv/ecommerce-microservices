@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-deploy
+  labels:
+    name: order-deploy
+    app: ecommerce-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: order-pod
+      app: ecommerce-app
+  template:
+    metadata:
+      name: order-pod
+      labels:
+        name: order-pod
+        app: ecommerce-app
+    spec:
+      containers:
+        - name: ecommerce-microservices-order-service
+          image: minhnt2012/ecommerce-microservices_order-service:v1
+          ports:
+            - containerPort: 8080

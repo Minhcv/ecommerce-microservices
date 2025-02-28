@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-deploy
+  labels:
+    name: product-deploy
+    app: ecommerce-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: product-pod
+      app: ecommerce-app
+  template:
+    metadata:
+      name: product-pod
+      labels:
+        name: product-pod
+        app: ecommerce-app
+    spec:
+      containers:
+        - name: ecommerce-microservices-product-service
+          image: minhnt2012/ecommerce-microservices_product-service:v1
+          ports:
+            - containerPort: 8080
