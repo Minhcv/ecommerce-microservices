@@ -20,6 +20,7 @@ spec:
     spec:
       containers:
         - name: ecommerce-microservices-frontend
-          image: minhnt2012/ecommerce-microservices_frontend:v1
+          image: ecommerce-microservices_frontend:latest
+          imagePullPolicy: Never
           ports:
-            - containerPort: 8080
+            - containerPort: 80

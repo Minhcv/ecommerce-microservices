@@ -1,20 +1,26 @@
-# Sử dụng Node.js để build ứng dụng
-FROM node:18 AS build
-
-# Đặt thư mục làm việc
+# 1. For build React app
+FROM node:lts AS development
+# Set working directory
 WORKDIR /app
-
-# Copy toàn bộ source code vào container
-COPY . .
-
-# Sử dụng Nginx để chạy ứng dụng
+#
+COPY package.json /app/package.json
+COPY package-lock.json /app/package-lock.json
+# Same as npm install
+RUN npm ci
+COPY . /app
+ENV CI=true
+ENV PORT=3000
+CMD [ "npm", "start" ]
+FROM development AS build
+RUN npm run build
+# 2. For Nginx setup
 FROM nginx:alpine
-
-# Copy file build từ `dist/` vào thư mục phục vụ của Nginx
-COPY --from=build /app/dist /usr/share/nginx/html
-
-# Expose cổng 80
-EXPOSE 80
-
-# Chạy Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Copy config nginx
+COPY --from=build /app/.nginx/nginx.conf /etc/nginx/conf.d/default.conf
+WORKDIR /usr/share/nginx/html
+# Remove default nginx static assets
+RUN rm -rf ./*
+# Copy static assets from builder stage
+COPY --from=build /app/dist .
+# Containers run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
