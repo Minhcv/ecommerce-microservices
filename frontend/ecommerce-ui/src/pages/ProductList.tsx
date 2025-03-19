@@ -20,7 +20,7 @@ export default function ProductList() {
 
     const fetchProducts = async () => {
         try {
-            const res = await axios.get("http://localhost:8084/api/v1/product/list");
+            const res = await axios.get("http://localhost:30001/api/v1/product/list");
             setProducts(res.data);
         } catch (error) {
             console.error("Lỗi khi lấy danh sách sản phẩm:", error);
@@ -32,7 +32,7 @@ export default function ProductList() {
         if (!newProduct.name || !newProduct.price) return;
 
         try {
-            const res = await axios.post("http://localhost:8084/api/v1/product/create", {
+            const res = await axios.post("http://localhost:30001/api/v1/product/create", {
                 name: newProduct.name,
                 price: parseFloat(newProduct.price),
             });

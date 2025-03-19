@@ -24,7 +24,7 @@ export default function CreateUser() {
         setMessage("");
 
         try {
-            await axios.post("http://localhost:8082/api/v1/customer/create", formData);
+            await axios.post("http://localhost:30002/api/v1/customer/create", formData);
             setMessage("Tạo user thành công!");
             navigate("/list-customer");
             setFormData({ name: "", email: "", phone: "", address: "" }); // Reset form

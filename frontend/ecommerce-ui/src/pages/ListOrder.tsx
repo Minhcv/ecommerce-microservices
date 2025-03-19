@@ -17,7 +17,7 @@ export default function ListOrder() {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await axios.get("http://localhost:8083/api/v1/order/list");
+                const response = await axios.get("http://localhost:30003/api/v1/order/list");
                 if (response.status === 200) {
                     setOrders(response.data);
                 } else {

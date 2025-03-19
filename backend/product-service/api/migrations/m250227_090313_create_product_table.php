@@ -20,6 +20,9 @@ class m250227_090313_create_product_table extends Migration
             'created_at' => $this->timestamp(),
             'updated_at' => $this->timestamp(),
         ]);
+        $this->execute("INSERT INTO product VALUES (997, 'Iphone11', 'Iphone11', 11000000, now(), now());");
+        $this->execute("INSERT INTO product VALUES (998, 'Iphone12', 'Iphone12', 12000000, now(), now());");
+        $this->execute("INSERT INTO product VALUES (999, 'Iphone13', 'Iphone12', 13000000, now(), now());");
     }
 
     /**

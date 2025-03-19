@@ -21,6 +21,7 @@ class m250227_090245_create_customer_table extends Migration
             'created_at' => $this->timestamp(),
             'updated_at' => $this->timestamp(),
         ]);
+        $this->execute("INSERT INTO customer VALUES (999, 'Minh', 'minh@gmail.comm', '123456789', 'Quang Tri', now(), now());");
     }
 
     /**

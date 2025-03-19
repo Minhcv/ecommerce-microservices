@@ -18,7 +18,7 @@ export default function ListCustomer() {
     useEffect(() => {
         const fetchCustomers = async () => {
             try {
-                const response = await axios.get("http://localhost:8082/api/v1/customer/list");
+                const response = await axios.get("http://localhost:30002/api/v1/customer/list");
                 if (response.status == 200) {
                     setCustomers(response.data);
                 } else {

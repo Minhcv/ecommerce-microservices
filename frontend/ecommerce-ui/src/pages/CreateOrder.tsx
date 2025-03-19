@@ -33,8 +33,8 @@ export default function CreateOrder() {
         const fetchData = async () => {
             try {
                 const [customerRes, productRes] = await Promise.all([
-                    axios.get("http://localhost:8082/api/v1/customer/list"),
-                    axios.get("http://localhost:8084/api/v1/product/list"),
+                    axios.get("http://localhost:30002/api/v1/customer/list"),
+                    axios.get("http://localhost:30001/api/v1/product/list"),
                 ]);
                 setCustomers(customerRes.data);
                 setProducts(productRes.data);
@@ -55,7 +55,7 @@ export default function CreateOrder() {
         setError("");
 
         try {
-            const response = await axios.post("http://localhost:8083/api/v1/order/create", formData);
+            const response = await axios.post("http://localhost:30003/api/v1/order/create", formData);
             if (response.data.status === "success") {
                 navigate("/list-order"); // Chuyển hướng sau khi tạo đơn hàng
             } else {
