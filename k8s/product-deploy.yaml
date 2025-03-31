@@ -18,9 +18,13 @@ spec:
         name: product-pod
         app: ecommerce-app
     spec:
+      initContainers:
+        - name: check-db-ready
+          image: postgres:15
+          command: [ 'sh', '-c', 'until pg_isready -h db -p 5432; do echo waiting for database; sleep 2; done;' ]
       containers:
         - name: ecommerce-microservices-product-service
-          image: ecommerce-microservices_product-service:latest
+          image: minhnt2012/ecommerce-microservices_product-service:v1
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
